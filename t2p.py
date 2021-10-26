@@ -35,13 +35,17 @@ for d in data['events']:
 	msg_body = message[3:]
 	machine_id = msg_body.split(":")[0]
 	commands = msg_body.split(":")[1]
-	if(get_no(sender, machine_id) == "user_done"):
+	command_file = get_no(sender, machine_id)
+	if(command_file == "user_done"):
 		print("user already done")
 		continue
-	with open(get_no(sender, machine_id), 'w') as f:
+	with open(command_file, 'w') as f:
 		f.write("#!/bin/bash\n\n")
 		for cmd in commands.split("%%%"):
 			f.write("echo -n \"$ \"\n")
 			escaped = cmd.replace('"', '\\"')
 			f.write("echo \"%s\" | pv -qL 10 \n" % escaped)
 			f.write("%s\n" % cmd)
+		f.write("exit\n")
+	os.chmod(command_file, 0o755)
+	os.system("asciinema rec -c \"/root/t2p/run.sh /root/t2p/%s\" /root/t2p/user/recordings/%s/%s" % (command_file, machine_id, command_file.split("/")[3]))
