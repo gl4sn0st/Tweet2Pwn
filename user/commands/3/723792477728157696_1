@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo -n "$ "
-echo "id" | pv -qL 10 
-id
+echo "echo \"test 1234\"" | pv -qL 10 
+echo "test 1234"
 echo -n "$ "
-echo "whoami" | pv -qL 10 
-whoami
+echo "kurwachuj" | pv -qL 10 
+kurwachuj
 echo -n "$ "
-echo "echo \"siemanko " | pv -qL 10 
-echo "siemanko 
+echo "ls -la" | pv -qL 10 
+ls -la
 exit
