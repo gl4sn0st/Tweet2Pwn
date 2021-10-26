@@ -7,6 +7,6 @@ echo -n "$ "
 echo "whoami" | pv -qL 10 
 whoami
 echo -n "$ "
-echo "echo \"123\"" | pv -qL 10 
-echo "123"
+echo "echo \"siemanko " | pv -qL 10 
+echo "siemanko 
 exit
