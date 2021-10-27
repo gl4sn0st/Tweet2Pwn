@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "width": 86,
+  "height": 41,
+  "duration": 9.124226,
+  "command": "/root/t2p/run.sh /root/t2p/user/commands/1/410663550_2 1",
+  "title": null,
+  "env": {
+    "TERM": "screen",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.304459,
+      "$ "
+    ],
+    [
+      0.001021,
+      "p"
+    ],
+    [
+      0.184638,
+      "s"
+    ],
+    [
+      0.090101,
+      " "
+    ],
+    [
+      0.090269,
+      "a"
+    ],
+    [
+      0.09019,
+      "u"
+    ],
+    [
+      0.090216,
+      "x"
+    ],
+    [
+      0.091434,
+      "\r\n"
+    ],
+    [
+      0.001514,
+      "/opt/commands.sh: line 5: ps: command not found\r\n$ "
+    ],
+    [
+      0.000437,
+      "n"
+    ],
+    [
+      0.180581,
+      "e"
+    ],
+    [
+      0.090044,
+      "t"
+    ],
+    [
+      0.090205,
+      "s"
+    ],
+    [
+      0.090168,
+      "t"
+    ],
+    [
+      0.090172,
+      "a"
+    ],
+    [
+      0.090205,
+      "t"
+    ],
+    [
+      0.090168,
+      " "
+    ],
+    [
+      0.090371,
+      "-"
+    ],
+    [
+      0.09001,
+      "a"
+    ],
+    [
+      0.180408,
+      "n"
+    ],
+    [
+      0.090134,
+      "o"
+    ],
+    [
+      0.090485,
+      "\r\n"
+    ],
+    [
+      0.001221,
+      "/opt/commands.sh: line 8: netstat: command not found\r\n"
+    ],
+    [
+      0.000764,
+      "$ "
+    ],
+    [
+      0.000955,
+      "f"
+    ],
+    [
+      0.180469,
+      "i"
+    ],
+    [
+      0.09117,
+      "n"
+    ],
+    [
+      0.090316,
+      "d"
+    ],
+    [
+      0.090283,
+      " "
+    ],
+    [
+      0.090108,
+      "/"
+    ],
+    [
+      0.090251,
+      " "
+    ],
+    [
+      0.090233,
+      "-"
+    ],
+    [
+      0.090214,
+      "u"
+    ],
+    [
+      0.090122,
+      "s"
+    ],
+    [
+      0.180433,
+      "e"
+    ],
+    [
+      0.090173,
+      "r"
+    ],
+    [
+      0.090264,
+      " "
+    ],
+    [
+      0.090278,
+      "r"
+    ],
+    [
+      0.090276,
+      "o"
+    ],
+    [
+      0.09007,
+      "o"
+    ],
+    [
+      0.090188,
+      "t"
+    ],
+    [
+      0.090264,
+      " "
+    ],
+    [
+      0.090086,
+      "-"
+    ],
+    [
+      0.180345,
+      "p"
+    ],
+    [
+      0.090137,
+      "e"
+    ],
+    [
+      0.09019,
+      "r"
+    ],
+    [
+      0.090206,
+      "m"
+    ],
+    [
+      0.090204,
+      " "
+    ],
+    [
+      0.090172,
+      "-"
+    ],
+    [
+      0.090166,
+      "4"
+    ],
+    [
+      0.090158,
+      "0"
+    ],
+    [
+      0.090234,
+      "0"
+    ],
+    [
+      0.180396,
+      "0"
+    ],
+    [
+      0.090081,
+      " "
+    ],
+    [
+      0.090296,
+      "-"
+    ],
+    [
+      0.090715,
+      "e"
+    ],
+    [
+      0.089719,
+      "x"
+    ],
+    [
+      0.090171,
+      "e"
+    ],
+    [
+      0.090104,
+      "c"
+    ],
+    [
+      0.090166,
+      " "
+    ],
+    [
+      0.090186,
+      "l"
+    ],
+    [
+      0.180399,
+      "s"
+    ],
+    [
+      0.090111,
+      " "
+    ],
+    [
+      0.090211,
+      "-"
+    ],
+    [
+      0.090194,
+      "l"
+    ],
+    [
+      0.090325,
+      "d"
+    ],
+    [
+      0.090167,
+      "b"
+    ],
+    [
+      0.090186,
+      " "
+    ],
+    [
+      0.090212,
+      "{"
+    ],
+    [
+      0.090142,
+      "}"
+    ],
+    [
+      0.090168,
+      " "
+    ],
+    [
+      0.161796,
+      "\\"
+    ],
+    [
+      0.091026,
+      "\r\n"
+    ],
+    [
+      0.038563,
+      "find: '/var/lib/apt/lists/partial': Permission denied\r\n"
+    ],
+    [
+      0.003022,
+      "find: '/var/cache/ldconfig': Permission denied\r\n"
+    ],
+    [
+      0.001998,
+      "find: '/var/cache/apt/archives/partial': Permission denied\r\n"
+    ],
+    [
+      0.008114,
+      "find: '/run/secrets/rhsm': Permission denied\r\n"
+    ],
+    [
+      0.581879,
+      "-rwsr-xr-x 1 root root 51280 Jan 10  2019 /bin/mount\r\n"
+    ],
+    [
+      0.005057,
+      "-rwsr-xr-x 1 root root 63568 Jan 10  2019 /bin/su\r\n-rwsr-xr-x 1 root root 34888 Jan 10  2019 /bin/umount\r\n-rwsr-xr-x 1 root root 69368 Mar  8  2021 /bin/ping\r\n"
+    ],
+    [
+      0.030019,
+      "find: '/proc/tty/driver': Permission denied\r\n"
+    ],
+    [
+      0.005942,
+      "find: '/proc/1/map_files': Operation not permitted\r\nfind: '/proc/14/task/14/fd/6': No such file or directory\r\nfind: '/proc/14/task/14/fdinfo/6': No such file or directory\r\nfind: '/proc/14/fd/5': No such file or directory\r\nfind: '/proc/14/map_files': Operation not permitted\r\nfind: '/proc/14/fdinfo/5': No such file or directory\r\n"
+    ],
+    [
+      0.025989,
+      "-rwsr-xr-x 1 root root 44440 Jul 27  2018 /usr/bin/newgrp\r\n"
+    ],
+    [
+      0.004947,
+      "-rwsr-xr-x 1 root root 63736 Jul 27  2018 /usr/bin/passwd\r\n"
+    ],
+    [
+      0.003133,
+      "-rwsr-xr-x 1 root root 44528 Jul 27  2018 /usr/bin/chsh\r\n"
+    ],
+    [
+      0.00129,
+      "-rwsr-xr-x 1 root root 54096 Jul 27  2018 /usr/bin/chfn\r\n"
+    ],
+    [
+      0.002538,
+      "-rwsr-xr-x 1 root root 39552 Feb 28  2019 /usr/bin/nice\r\n"
+    ],
+    [
+      0.00899,
+      "-rwsr-xr-x 1 root root 84016 Jul 27  2018 /usr/bin/gpasswd\r\n-rwsr-xr-x 1 root root 157192 Jan 20  2021 /usr/bin/sudo\r\n"
+    ],
+    [
+      0.258034,
+      "find: '/root': Permission denied\r\n"
+    ],
+    [
+      0.000184,
+      "$ "
+    ],
+    [
+      0.001907,
+      "s"
+    ],
+    [
+      0.180641,
+      "l"
+    ],
+    [
+      0.090123,
+      "e"
+    ],
+    [
+      0.090806,
+      "e"
+    ],
+    [
+      0.089617,
+      "p"
+    ],
+    [
+      0.090135,
+      "("
+    ],
+    [
+      0.090259,
+      "2"
+    ],
+    [
+      0.090253,
+      "0"
+    ],
+    [
+      0.090163,
+      ")"
+    ],
+    [
+      0.090752,
+      "\r\n"
+    ],
+    [
+      0.000286,
+      "/opt/commands.sh: line 14: syntax error near unexpected token `20'\r\n/opt/commands.sh: line 14: `sleep(20)'\r\n"
+    ]
+  ]
+}

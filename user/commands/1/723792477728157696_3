@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo -n "$ "
+echo -n "vulnerable:1> "
 echo "id" | pv -qL 10 
-id
-echo -n "$ "
-echo "/bin/sh -p" | pv -qL 10 
-/bin/sh -p
+bash -c "id"
+echo -n "vulnerable:1> "
+echo "whoami" | pv -qL 10 
+bash -c "whoami"
 exit

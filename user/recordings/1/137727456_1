@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 24,
+  "duration": 0.954911,
+  "command": "/root/t2p/run.sh /root/t2p/user/commands/1/137727456_1 1",
+  "title": null,
+  "env": {
+    "TERM": "screen",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.532805,
+      "$ "
+    ],
+    [
+      0.006933,
+      "i"
+    ],
+    [
+      0.180649,
+      "d"
+    ],
+    [
+      0.090328,
+      "\r\n"
+    ],
+    [
+      0.009904,
+      "uid=1000(dev_user) gid=1000(dev_user) groups=1000(dev_user)\r\n"
+    ]
+  ]
+}

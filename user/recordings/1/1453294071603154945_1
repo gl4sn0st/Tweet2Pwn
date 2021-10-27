@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "width": 80,
+  "height": 24,
+  "duration": 188.973071,
+  "command": "/root/t2p/run.sh /root/t2p/user/commands/1/1453294071603154945_1 1",
+  "title": null,
+  "env": {
+    "TERM": "screen",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.308718,
+      "$ "
+    ],
+    [
+      0.000111,
+      "c"
+    ],
+    [
+      0.183723,
+      "a"
+    ],
+    [
+      0.090323,
+      "t"
+    ],
+    [
+      0.090335,
+      " "
+    ],
+    [
+      0.090177,
+      "/"
+    ],
+    [
+      0.08998,
+      "o"
+    ],
+    [
+      0.090229,
+      "p"
+    ],
+    [
+      0.09017,
+      "t"
+    ],
+    [
+      0.090158,
+      "/"
+    ],
+    [
+      0.090198,
+      "c"
+    ],
+    [
+      0.180628,
+      "o"
+    ],
+    [
+      0.090124,
+      "m"
+    ],
+    [
+      0.090103,
+      "m"
+    ],
+    [
+      0.090254,
+      "a"
+    ],
+    [
+      0.090174,
+      "n"
+    ],
+    [
+      0.090202,
+      "d"
+    ],
+    [
+      0.090155,
+      "s"
+    ],
+    [
+      0.090231,
+      "."
+    ],
+    [
+      0.090134,
+      "s"
+    ],
+    [
+      0.180335,
+      "h"
+    ],
+    [
+      0.090604,
+      "\r\n"
+    ],
+    [
+      0.002788,
+      "#!/bin/bash\r\n\r\necho -n \"$ \"\r\necho \"cat /opt/commands.sh\" | pv -qL 10 \r\ncat /opt/commands.sh\r\necho -n \"$ \"\r\necho \"sudo -l\" | pv -qL 10 \r\nsudo -l\r\necho -n \"$ \"\r\necho \"whoami\" | pv -qL 10 \r\nwhoami\r\necho -n \"$ \"\r\necho \"id\" | pv -qL 10 \r\nid\r\necho -n \"$ \"\r\necho \"uname -a\" | pv -qL 10 \r\nuname -a\r\necho -n \"$ \"\r\necho \"pwd\" | pv -qL 10 \r\npwd\r\necho -n \"$ \"\r\necho \"ls -lah /home\" | pv -qL 10 \r\nls -lah /home\r\necho -n \"$ \"\r\necho \"ls -alh /var/www/\" | pv -qL 10 \r\nls -alh /var/www/\r\necho -n \"$ \"\r\necho \"cat /etc/passwd\" | pv -qL 10 \r\ncat /etc/passwd\r\nexit\r\n"
+    ],
+    [
+      0.001142,
+      "$ s"
+    ],
+    [
+      0.180408,
+      "u"
+    ],
+    [
+      0.090135,
+      "d"
+    ],
+    [
+      0.090225,
+      "o"
+    ],
+    [
+      0.090192,
+      " "
+    ],
+    [
+      0.09024,
+      "-"
+    ],
+    [
+      0.090139,
+      "l"
+    ],
+    [
+      0.090905,
+      "\r\n"
+    ],
+    [
+      0.015031,
+      "sudo: unable to resolve host baae19582936: Temporary failure in name resolution\r\n"
+    ],
+    [
+      0.008862,
+      "\r\nWe trust you have received the usual lecture from the local System\r\nAdministrator. It usually boils down to these three things:\r\n\r\n    #1) Respect the privacy of others.\r\n    #2) Think before you type.\r\n    #3) With great power comes great responsibility.\r\n\r\n"
+    ],
+    [
+      0.001737,
+      "[sudo] password for dev_user: "
+    ]
+  ]
+}

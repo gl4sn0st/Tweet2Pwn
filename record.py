@@ -1,6 +1,8 @@
 import sys
 import json
 import os
+import subprocess
+import re
 from TwitterAPI import TwitterAPI
 
 consumer = os.environ['CONSUMER_KEY']
@@ -21,8 +23,7 @@ def upload_gif(gif):
 	d = json.loads(up.text)
 	return d['media_id']
 
-def build_answer(sender, text, gif):
-	media_id = upload_gif(gif)
+def build_answer(sender, text):
 	event = {
 		"event": {
 			"type": "message_create",
@@ -32,12 +33,6 @@ def build_answer(sender, text, gif):
 				},
 				"message_data": {
 					"text": text,
-					"attachment": {
-						"type": "media",
-						"media": {
-							"id": media_id
-						}
-					}
 				}
 			}
 		}
@@ -47,10 +42,16 @@ def build_answer(sender, text, gif):
 
 os.chmod(command_file, 0o755)
 file_name = command_file.split("/")[-1]
-os.system("asciinema rec -c \"/root/t2p/run.sh %s\" /root/t2p/user/recordings/%s/%s" % (command_file, machine_id, file_name))
-os.system("asciicast2gif -w 100 -h 40 /root/t2p/user/recordings/%s/%s /root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name, machine_id, file_name))
+c = '"/root/t2p/run.sh \"%s\" \"%s\""' % (command_file, machine_id)
+r = '/root/t2p/user/recordings/%s/%s' % (machine_id, file_name)
+#os.system("asciinema rec -c \"/root/t2p/run.sh %s %s\" /root/t2p/user/recordings/%s/%s" % (command_file, machine_id, machine_id, file_name))
+#os.system("asciicast2gif -w 100 -h 40 /root/t2p/user/recordings/%s/%s /root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name, machine_id, file_name))
+cmd_data = subprocess.check_output("/usr/bin/asciinema rec -c \"/root/t2p/run.sh %s %s\" /var/www/records/json/%s" % (command_file, machine_id, message_id), shell=True)
+#link = re.search(r'(http[^\\]+)\\n', str(cmd_data)).groups()[0]
+link = "https://records.deicide.pl/index.php?msgid=%s" % message_id
 attempt = file_name[-1]
-build_answer(sender, "Attempt: %s/3. Here is your recording." % attempt, "/root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name))
-with open("/root/t2p/done/%s.txt" % machine_id, 'a') as f:
-	f.write("%s\n" % message_id)
-	f.close()
+if(os.path.getsize("/var/www/records/json/%s" % message_id) > 50000000):
+	here = "Here is your recording. WARNING: It's over 50MB. Consider changing your commands."
+else:
+	here = "Here is your recording."
+build_answer(sender, "Attempt: %s/3. %s\n\n%s" % (attempt, here, link))

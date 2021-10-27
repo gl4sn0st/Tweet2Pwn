@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo -n "$ "
+echo "id" | pv -qL 10 
+id
+echo -n "$ "
+echo "whoami" | pv -qL 10 
+whoami
+echo -n "$ "
+echo "ls -l /root/html/index.html" | pv -qL 10 
+ls -l /root/html/index.html
+exit
