@@ -46,11 +46,11 @@ def build_answer(sender, text, gif):
 	r = api.request("direct_messages/events/new", json.dumps(event))
 
 os.chmod(command_file, 0o755)
-file_name = command_file.split("/")[3]
-#os.system("asciinema rec -c \"/root/t2p/run.sh /root/t2p/%s\" /root/t2p/user/recordings/%s/%s" % (command_file, machine_id, file_name))
-#os.system("asciicast2gif -w 100 -h 40 /root/t2p/user/recordings/%s/%s /root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name, machine_id, file_name))
+file_name = command_file.split("/")[-1]
+os.system("asciinema rec -c \"/root/t2p/run.sh %s\" /root/t2p/user/recordings/%s/%s" % (command_file, machine_id, file_name))
+os.system("asciicast2gif -w 100 -h 40 /root/t2p/user/recordings/%s/%s /root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name, machine_id, file_name))
 attempt = file_name[-1]
-#build_answer(sender, "Attempt: %s/3. Here is your recording." % attempt, "/root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name))
-with open("done/%s.txt" % machine_id, 'w') as f:
+build_answer(sender, "Attempt: %s/3. Here is your recording." % attempt, "/root/t2p/user/recordings/%s/%s.gif" % (machine_id, file_name))
+with open("/root/t2p/done/%s.txt" % machine_id, 'a') as f:
 	f.write("%s\n" % message_id)
 	f.close()
