@@ -1,6 +1,12 @@
 #!/bin/bash
 
-echo -n "$ "
-echo "/bin/sh -p" | pv -qL 10 
-bash -c "/bin/sh -p"
+echo -n "vulnerable:1> "
+echo "id" | pv -qL 10 
+bash -c "id"
+echo -n "vulnerable:1> "
+echo "whoami" | pv -qL 10 
+bash -c "whoami"
+echo -n "vulnerable:1> "
+echo "ls -la /etc" | pv -qL 10 
+bash -c "ls -la /etc"
 exit

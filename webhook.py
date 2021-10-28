@@ -31,8 +31,13 @@ def get_no(id, machine):
 	if(Path(APP_PATH+"/user/commands/%s/%s_1" % (machine, id)).is_file()):
 		if(Path(APP_PATH+"/user/commands/%s/%s_2" % (machine, id)).is_file()):
 			if(Path(APP_PATH+"/user/commands/%s/%s_3" % (machine, id)).is_file()):
-				
-				return "user_done"
+				if(Path(APP_PATH+"/user/commands/%s/%s_4" % (machine, id)).is_file()):
+					if(Path(APP_PATH+"/user/commands/%s/%s_5" % (machine, id)).is_file()):
+						return "user_done"
+					else:
+						return APP_PATH+"/user/commands/%s/%s_5" % (machine, id)
+				else:
+					return APP_PATH+"/user/commands/%s/%s_4" % (machine, id)
 			else:
 				return APP_PATH+"/user/commands/%s/%s_3" % (machine, id)
 		else:
@@ -84,7 +89,7 @@ def handle_message(event_data):
 	message = d['message_create']['message_data']['text']
 	message_id = d['id']
 	if(re.match('\/p \d{1,2}\:\:.*', message) is None):
-		print("message: %s not applicable, sender: %s, bot: %s" % message)
+		print("message: %s not applicable" % message)
 		return
 	msg_body = message[3:]
 	machine_id = msg_body.split("::")[0]
@@ -93,16 +98,10 @@ def handle_message(event_data):
 	command_file = get_no(sender, machine_id)
 	if(machine_id not in AVAILABLE_MACHINES):
 		print("machine ID %s not available" % machine_id)
-		with open(APP_PATH+"/done/%s.txt" % machine_id, "a") as f:
-			f.write("%s\n" % message_id)
-			f.close()
 		return
 	if(command_file == "user_done"):
 		print("user ID %s already done" % sender)
 		answer_text(sender, "Maximum number of attempts exceeded. Try again next time.")
-		with open(APP_PATH+"/done/%s.txt" % machine_id, "a") as f:
-			f.write("%s\n" % message_id)
-			f.close()
 		return
 	with open(command_file, 'w') as f:
 		f.write("#!/bin/bash\n\n")
@@ -111,12 +110,20 @@ def handle_message(event_data):
 			escaped = cmd.replace("\\", "\\\\").replace('"', '\\"').replace('$', '\$')
 			command = special(escaped)
 			ex_command = special(cmd)
+			f.write("sleep 1\n")
 			f.write("echo \"%s\" | pv -qL 10 \n" % command)
 			f.write("bash -c \"%s\"\n" % command)
 		f.write("exit\n")
 		f.close()
 	print("Going with screen for message: %s" % message_id)
 	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id])
+
+@events_adapter.on("direct_message_indicate_typing_events")
+def handle_typing(event_data):
+	event = event_data['event']
+	id = event['sender_id']
+	name = event_data['users'][id]['screen_name']
+	print("@%s typed something.." % name)
 
 app.run(port=5555)
 

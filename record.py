@@ -54,4 +54,4 @@ if(os.path.getsize("/var/www/records/json/%s" % message_id) > 50000000):
 	here = "Here is your recording. WARNING: It's over 50MB. Consider changing your commands."
 else:
 	here = "Here is your recording."
-build_answer(sender, "Attempt: %s/3. %s\n\n%s" % (attempt, here, link))
+build_answer(sender, "Attempt: %s/5. %s\n\n%s" % (attempt, here, link))

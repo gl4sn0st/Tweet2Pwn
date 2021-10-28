@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "uname -a" | pv -qL 10 
+bash -c "uname -a"
+echo -n "vulnerable:1> "
+sleep 1
+echo "cat /etc/crontab" | pv -qL 10 
+bash -c "cat /etc/crontab"
+echo -n "vulnerable:1> "
+sleep 1
+echo "crontab -l" | pv -qL 10 
+bash -c "crontab -l"
+echo -n "vulnerable:1> "
+sleep 1
+echo "find / -perm -2 -type f 2>/dev/null" | pv -qL 10 
+bash -c "find / -perm -2 -type f 2>/dev/null"
+exit
