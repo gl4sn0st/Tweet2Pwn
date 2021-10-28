@@ -10,10 +10,14 @@ echo "whoami" | pv -qL 10
 bash -c "whoami"
 echo -n "vulnerable:1> "
 sleep 1
-echo "ls -l /etc" | pv -qL 10 
-bash -c "ls -l /etc"
+echo "ls -lthr /root/html/" | pv -qL 10 
+bash -c "ls -lthr /root/html/"
 echo -n "vulnerable:1> "
 sleep 1
-echo "echo \"1234 :)\"" | pv -qL 10 
-bash -c "echo \"1234 :)\""
+echo "ps aux" | pv -qL 10 
+bash -c "ps aux"
+echo -n "vulnerable:1> "
+sleep 1
+echo "ps -efax" | pv -qL 10 
+bash -c "ps -efax"
 exit

