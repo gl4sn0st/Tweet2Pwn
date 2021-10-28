@@ -1,6 +1,8 @@
 # Tweet2Pwn
 
 Tweet2Pwn is my little project. It's a bot that allows you to hack virtual machines via Twitter direct messages.
+
+## How it works
 Basically the bot works like this:
 
 1. Bot is webhook(webhook.py) running in webhook.deicide.pl domain, registered in Twitter, waiting for events.
@@ -16,7 +18,7 @@ Basically the bot works like this:
 9. After running commands, container is closed and removed(--rm flag), recording from asciinema is moved to /var/www/records/json directory so that it can be accessed with https://records.deicide.pl, the player
 10. Link to player is generated and sent back to user.
 
-
+## Useful info
 Also, if docker container is running for more than 2 minutes, it's stopped automatically with cron command:
 
 ```

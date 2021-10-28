@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "whoami" | pv -qL 10 
+bash -c "whoami"
+echo -n "vulnerable:1> "
+sleep 1
+echo "uname -a" | pv -qL 10 
+bash -c "uname -a"
+echo -n "vulnerable:1> "
+sleep 1
+echo "cat /etc/passwd" | pv -qL 10 
+bash -c "cat /etc/passwd"
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la /" | pv -qL 10 
+bash -c "ls -la /"
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la /root" | pv -qL 10 
+bash -c "ls -la /root"
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la" | pv -qL 10 
+bash -c "ls -la"
+echo -n "vulnerable:1> "
+sleep 1
+echo "pwd" | pv -qL 10 
+bash -c "pwd"
+echo -n "vulnerable:1> "
+sleep 1
+echo "find / -perm /u=s,g=s" | pv -qL 10 
+bash -c "find / -perm /u=s,g=s"
+exit

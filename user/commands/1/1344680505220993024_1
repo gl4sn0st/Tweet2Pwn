@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "whoami" | pv -qL 10 
+bash -c "whoami"
+echo -n "vulnerable:1> "
+sleep 1
+echo "sudo -l" | pv -qL 10 
+bash -c "sudo -l"
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -laR /" | pv -qL 10 
+bash -c "ls -laR /"
+exit
