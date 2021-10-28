@@ -97,11 +97,6 @@ def handle_message(event_data):
 			f.write("%s\n" % message_id)
 			f.close()
 		return
-	with open(APP_PATH+"/done/%s.txt" % machine_id) as f:
-		if message_id in f.read():
-			print("message ID %s already done" % message_id)
-			f.close()
-			return
 	if(command_file == "user_done"):
 		print("user ID %s already done" % sender)
 		answer_text(sender, "Maximum number of attempts exceeded. Try again next time.")
@@ -119,9 +114,6 @@ def handle_message(event_data):
 			f.write("echo \"%s\" | pv -qL 10 \n" % command)
 			f.write("bash -c \"%s\"\n" % command)
 		f.write("exit\n")
-		f.close()
-	with open("/root/t2p/done/%s.txt" % machine_id, 'a') as f:
-		f.write("%s\n" % message_id)
 		f.close()
 	print("Going with screen for message: %s" % message_id)
 	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id])
