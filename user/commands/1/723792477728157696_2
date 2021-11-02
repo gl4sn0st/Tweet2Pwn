@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "echo \"test\"" | pv -qL 10 
+bash -c "echo \"test\""
+echo -n "vulnerable:1> "
+sleep 1
+echo "id" | pv -qL 10 
+bash -c "id"
+exit

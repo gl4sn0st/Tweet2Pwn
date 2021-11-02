@@ -16,7 +16,7 @@ consumer_secret = os.environ['CONSUMER_SECRET']
 access = os.environ['ACCESS_TOKEN']
 secret = os.environ['SECRET_TOKEN']
 APP_PATH = "/root/t2p"
-AVAILABLE_MACHINES = ['1']
+AVAILABLE_MACHINES = { '1': 'Name: It feels nice becoming a root.\nGoal: Add yourself to Hall of Fame file accessible in /root/html/index.html via command line\nAttempts: 5'}
 api = TwitterAPI(consumer, consumer_secret, access, secret)
 
 app = Flask(__name__)
@@ -85,6 +85,24 @@ def webhook_challenge():
 
 	return jsonify(response_token="sha256="+base64.b64encode(sha256).decode())
 
+def parse_command(sender, message):
+	command = message[1:]
+	if command == "help":
+		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 1::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nYou can get actually available machines from the bot's tweets, or by sensing /machines command here."
+	elif command == "machines":
+		tmp = "Actually available machines are: \n\n"
+		for i in AVAILABLE_MACHINES:
+			tmp = tmp + "============\n"
+			tmp = tmp + "ID: %s\n" % i
+			tmp = tmp + AVAILABLE_MACHINES[i]
+			tmp = tmp + "\n============\n"
+
+		resp = tmp
+	else:
+		resp = "Command not recognized."
+
+	answer_text(sender, resp)
+		
 # Here all the interesting stuff is going on, handling DM events :)
 @events_adapter.on("direct_message_events")
 def handle_message(event_data):
@@ -95,6 +113,10 @@ def handle_message(event_data):
 		return
 	message = d['message_create']['message_data']['text']
 	message_id = d['id']
+	if(re.match('\![a-zA-Z]{1,9}', message) is not None): # Run user commands
+		print("parsing command: %s" % message)
+		parse_command(sender, message)
+		return
 	if(re.match('\/p \d{1,2}\:\:.*', message) is None): # Message must have required format
 		print("message: %s not applicable" % message)
 		return
