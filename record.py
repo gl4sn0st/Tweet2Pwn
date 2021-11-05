@@ -16,6 +16,7 @@ command_file = sys.argv[1]
 machine_id = sys.argv[2]
 sender = sys.argv[3]
 message_id = sys.argv[4]
+attempts = sys.argv[5]
 
 def upload_gif(gif): # Don't need it, no gifs are being uploaded, I'm just scared to delete it.
 	file = open(gif, 'rb')
@@ -56,4 +57,4 @@ if(os.path.getsize("/var/www/records/json/%s" % message_id) > 50000000): # If th
 	here = "Here is your recording. WARNING: It's over 50MB. Consider changing your commands."
 else:
 	here = "Here is your recording."
-build_answer(sender, "Attempt: %s/5. %s\n\n%s" % (attempt, here, link)) # Send user nice info with link to their recording.
+build_answer(sender, "Attempt: %s/%s. %s\n\n%s" % (attempt, attempts, here, link)) # Send user nice info with link to their recording.

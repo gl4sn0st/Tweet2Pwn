@@ -16,7 +16,7 @@ consumer_secret = os.environ['CONSUMER_SECRET']
 access = os.environ['ACCESS_TOKEN']
 secret = os.environ['SECRET_TOKEN']
 APP_PATH = "/root/t2p"
-AVAILABLE_MACHINES = { '1': 'Name: It feels nice becoming a root.\nGoal: Add yourself to Hall of Fame file accessible in /root/html/index.html via command line\nAttempts: 5'}
+AVAILABLE_MACHINES = { '1': '5;It feels nice becoming a root.;Add yourself to Hall of Fame file accessible in /root/html/index.html via command line', '2':'7;Einstein once said..;Add yourself to Hall of Fame accessible in /root/html/index.html via command line' }
 api = TwitterAPI(consumer, consumer_secret, access, secret)
 
 app = Flask(__name__)
@@ -30,24 +30,15 @@ def get_account_id():
 BOT_ID = get_account_id()
 
 # I know, this could be done better, but I will do it later :P
-def get_no(id, machine):
-	if(Path(APP_PATH+"/user/commands/%s/%s_1" % (machine, id)).is_file()):
-		if(Path(APP_PATH+"/user/commands/%s/%s_2" % (machine, id)).is_file()):
-			if(Path(APP_PATH+"/user/commands/%s/%s_3" % (machine, id)).is_file()):
-				if(Path(APP_PATH+"/user/commands/%s/%s_4" % (machine, id)).is_file()):
-					if(Path(APP_PATH+"/user/commands/%s/%s_5" % (machine, id)).is_file()):
-						return "user_done"
-					else:
-						return APP_PATH+"/user/commands/%s/%s_5" % (machine, id)
-				else:
-					return APP_PATH+"/user/commands/%s/%s_4" % (machine, id)
+def get_no(id, machine, attempts):
+	for i in range(1, int(attempts)+1):
+		if(Path(APP_PATH+"/user/commands/%s/%s_%s" % (machine, id, i)).is_file()):
+			if(i == attempts):
+				return "user_done"
 			else:
-				return APP_PATH+"/user/commands/%s/%s_3" % (machine, id)
+				continue
 		else:
-			return APP_PATH+"/user/commands/%s/%s_2" % (machine, id)
-	else:
-		return APP_PATH+"/user/commands/%s/%s_1" % (machine, id)
-
+			return APP_PATH+"/user/commands/%s/%s_%s" % (machine, id, i)
 # Function that replaces HTML encoded characters to real characters
 def special(cmd):
 	rpl = {"&gt;":">", "&lt;":"<", "&amp;":"&"}
@@ -88,18 +79,23 @@ def webhook_challenge():
 def parse_command(sender, message):
 	command = message[1:]
 	if command == "help":
-		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 1::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nYou can get actually available machines from the bot's tweets, or by sensing /machines command here."
+		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 1::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nYou can get actually available machines from the bot's tweets, or by sensing !machines command here."
 	elif command == "machines":
-		tmp = "Actually available machines are: \n\n"
+		tmp = "Actually available machines are: \n\n============\n\n"
 		for i in AVAILABLE_MACHINES:
-			tmp = tmp + "============\n"
+			info = AVAILABLE_MACHINES[i].split(";")
+			attempts = info[0]
+			name = info[1]
+			goal = info[2]
 			tmp = tmp + "ID: %s\n" % i
-			tmp = tmp + AVAILABLE_MACHINES[i]
+			tmp = tmp + "Name: %s\n" % name
+			tmp = tmp + "Goal: %s\n" % goal
+			tmp = tmp + "Attempts: %s\n" % attempts
 			tmp = tmp + "\n============\n"
 
 		resp = tmp
 	else:
-		resp = "Command not recognized."
+		resp = "Command not recognized. Available commands: !help, !machines"
 
 	answer_text(sender, resp)
 		
@@ -122,9 +118,13 @@ def handle_message(event_data):
 		return
 	msg_body = message[3:]
 	machine_id = msg_body.split("::")[0]
+	if(machine_id not in AVAILABLE_MACHINES):
+		print("machines ID %s not available" % machine_id)
+	else:
+		attempts = AVAILABLE_MACHINES[machine_id].split(";")[0]
 	cmds = msg_body.split("::")[1:] # All commands from message, after "::"
 	commands = ''.join(cmds) # In case someone put "::" in their commands, all elements from list "cmds" are joined
-	command_file = get_no(sender, machine_id) # Get path to file where all commands from user will be stored
+	command_file = get_no(sender, machine_id, attempts) # Get path to file where all commands from user will be stored
 	if(machine_id not in AVAILABLE_MACHINES):
 		print("machine ID %s not available" % machine_id)
 		return
@@ -141,11 +141,11 @@ def handle_message(event_data):
 			ex_command = special(cmd)
 			f.write("sleep 1\n") # After every command give user a second to pause the recording
 			f.write("echo \"%s\" | pv -qL 10 \n" % command) # Simulate typing a command with pv
-			f.write("bash -c \"%s\"\n" % command) # Actually execute the command. "bash -c" is added because in case of errors I don't want the error message to begin with cmds.sh
+			f.write("%s\n" % ex_command) # Actually execute the command. "bash -c" is added because in case of errors I don't want the error message to begin with cmds.sh
 		f.write("exit\n")
 		f.close()
 	print("Going with screen for message: %s" % message_id)
-	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id]) # Open screen, dont attach to it and run python script record.py inside
+	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id, attempts]) # Open screen, dont attach to it and run python script record.py inside
 
 # In case someone started typing a message, log it. I just want to know :)
 @events_adapter.on("direct_message_indicate_typing_events")
