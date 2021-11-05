@@ -29,7 +29,7 @@ def get_account_id():
     
 BOT_ID = get_account_id()
 
-# I know, this could be done better, but I will do it later :P
+# Function that counts user's attempts and returns next user commands file path
 def get_no(id, machine, attempts):
 	for i in range(1, int(attempts)+1):
 		if(Path(APP_PATH+"/user/commands/%s/%s_%s" % (machine, id, i)).is_file()):
@@ -81,13 +81,13 @@ def parse_command(sender, message):
 	if command == "help":
 		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 1::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nYou can get actually available machines from the bot's tweets, or by sensing !machines command here."
 	elif command == "machines":
-		tmp = "Actually available machines are: \n\n============\n\n"
+		tmp = "Actually available machines are: \n\n============\n"
 		for i in AVAILABLE_MACHINES:
 			info = AVAILABLE_MACHINES[i].split(";")
 			attempts = info[0]
 			name = info[1]
 			goal = info[2]
-			tmp = tmp + "ID: %s\n" % i
+			tmp = tmp + "\nID: %s\n" % i
 			tmp = tmp + "Name: %s\n" % name
 			tmp = tmp + "Goal: %s\n" % goal
 			tmp = tmp + "Attempts: %s\n" % attempts
