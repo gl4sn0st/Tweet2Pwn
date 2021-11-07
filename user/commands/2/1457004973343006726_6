@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/shadow-" | pv -qL 10 
+cat /etc/shadow-
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/security/opasswd" | pv -qL 10 
+cat /etc/security/opasswd
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/shadow" | pv -qL 10 
+cat /etc/shadow
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/sudoers" | pv -qL 10 
+cat /etc/sudoers
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/sudoers.d/README" | pv -qL 10 
+cat /etc/sudoers.d/README
+exit

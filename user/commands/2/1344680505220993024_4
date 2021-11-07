@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /opt/stuff/*" | pv -qL 10 
+cat /opt/stuff/*
+echo -n "vulnerable:2> "
+sleep 1
+echo "touch stuff/{1..6}.txt" | pv -qL 10 
+touch stuff/{1..6}.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy" | pv -qL 10 
+copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la stuff" | pv -qL 10 
+ls -la stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "rm -rf stuff/*" | pv -qL 10 
+rm -rf stuff/*
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la /opt/stuff" | pv -qL 10 
+ls -la /opt/stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "ln -s /root/html stuff/roothtml" | pv -qL 10 
+ln -s /root/html stuff/roothtml
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy" | pv -qL 10 
+copy
+exit

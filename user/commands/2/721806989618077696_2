@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:2> "
+sleep 1
+echo "strings /usr/bin/copy" | pv -qL 10 
+strings /usr/bin/copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "/usr/bin/copy" | pv -qL 10 
+/usr/bin/copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "/usr/bin/copy sh -c \"echo 'hello!'\"" | pv -qL 10 
+/usr/bin/copy sh -c "echo 'hello!'"
+echo -n "vulnerable:2> "
+sleep 1
+echo "/usr/bin/copy --help" | pv -qL 10 
+/usr/bin/copy --help
+echo -n "vulnerable:2> "
+sleep 1
+echo "pwd" | pv -qL 10 
+pwd
+exit

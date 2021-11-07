@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:1> "
+sleep 1
+echo "whoami" | pv -qL 10 
+whoami
+echo -n "vulnerable:1> "
+sleep 1
+echo "find . -type f -perm -4000" | pv -qL 10 
+find . -type f -perm -4000
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la /home" | pv -qL 10 
+ls -la /home
+echo -n "vulnerable:1> "
+sleep 1
+echo "sudo -l" | pv -qL 10 
+sudo -l
+echo -n "vulnerable:1> "
+sleep 1
+echo "cat /etc/passwd" | pv -qL 10 
+cat /etc/passwd
+echo -n "vulnerable:1> "
+sleep 1
+echo "cat /etc/crontab" | pv -qL 10 
+cat /etc/crontab
+echo -n "vulnerable:1> "
+sleep 1
+echo "env" | pv -qL 10 
+env
+exit

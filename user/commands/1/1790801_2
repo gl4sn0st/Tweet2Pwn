@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "find /ls -la homels -la /rootls -la /" | pv -qL 10 
+find /ls -la homels -la /rootls -la /
+exit

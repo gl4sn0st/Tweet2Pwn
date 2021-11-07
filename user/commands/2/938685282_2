@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "file /usr/bin/copy" | pv -qL 10 
+file /usr/bin/copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -al /usr/bin/copy" | pv -qL 10 
+ls -al /usr/bin/copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "/usr/bin/copy -h" | pv -qL 10 
+/usr/bin/copy -h
+exit

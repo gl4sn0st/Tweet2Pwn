@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "/usr/bin/copy --help" | pv -qL 10 
+/usr/bin/copy --help
+exit

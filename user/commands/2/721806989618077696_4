@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:2> "
+sleep 1
+echo "which sh" | pv -qL 10 
+which sh
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah" | pv -qL 10 
+ls -lah
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah /opt/stuff" | pv -qL 10 
+ls -lah /opt/stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah /home/dev_user/stuff/" | pv -qL 10 
+ls -lah /home/dev_user/stuff/
+exit

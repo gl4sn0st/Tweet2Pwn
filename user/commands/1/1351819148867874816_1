@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la" | pv -qL 10 
+ls -la
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la /" | pv -qL 10 
+ls -la /
+echo -n "vulnerable:1> "
+sleep 1
+echo "pwd" | pv -qL 10 
+pwd
+echo -n "vulnerable:1> "
+sleep 1
+echo " find ." | pv -qL 10 
+ find .
+exit

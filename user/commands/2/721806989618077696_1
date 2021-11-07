@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:2> "
+sleep 1
+echo "whoami" | pv -qL 10 
+whoami
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/passwd" | pv -qL 10 
+cat /etc/passwd
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /etc/shadow" | pv -qL 10 
+cat /etc/shadow
+echo -n "vulnerable:2> "
+sleep 1
+echo "find / -user root -perm -4000 -exec ls -ldb {} \\; 2>/dev/null" | pv -qL 10 
+find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
+echo -n "vulnerable:2> "
+sleep 1
+echo "" | pv -qL 10 
+
+exit

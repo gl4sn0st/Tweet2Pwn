@@ -52,7 +52,7 @@ r = '/root/t2p/user/recordings/%s/%s' % (machine_id, file_name)
 cmd_data = subprocess.check_output("/usr/bin/asciinema rec -c \"/root/t2p/run.sh %s %s\" /var/www/records/json/%s" % (command_file, machine_id, message_id), shell=True)
 #link = re.search(r'(http[^\\]+)\\n', str(cmd_data)).groups()[0]
 link = "https://records.deicide.pl/index.php?msgid=%s" % message_id # Generating link to recording
-attempt = file_name[-1] # Command file names are <number>_<attempt> so here we get attempt number
+attempt = file_name.split("_")[1] # Command file names are <number>_<attempt> so here we get attempt number
 if(os.path.getsize("/var/www/records/json/%s" % message_id) > 50000000): # If the recording is bigger than 50MB, tell user about that. It's their browser which parses the data :)
 	here = "Here is your recording. WARNING: It's over 50MB. Consider changing your commands."
 else:

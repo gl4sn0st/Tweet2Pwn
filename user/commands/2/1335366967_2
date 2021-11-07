@@ -1,0 +1,63 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah /home/dev_user/stuff/" | pv -qL 10 
+ls -lah /home/dev_user/stuff/
+echo -n "vulnerable:2> "
+sleep 1
+echo "mkdir -p /home/dev_user/stuff/jtbs" | pv -qL 10 
+mkdir -p /home/dev_user/stuff/jtbs
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/1.txt" | pv -qL 10 
+cat /home/dev_user/stuff/1.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/1.txt" | pv -qL 10 
+cat /home/dev_user/stuff/1.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/2.txt" | pv -qL 10 
+cat /home/dev_user/stuff/2.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/3.txt" | pv -qL 10 
+cat /home/dev_user/stuff/3.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/4.txt" | pv -qL 10 
+cat /home/dev_user/stuff/4.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/5.txt" | pv -qL 10 
+cat /home/dev_user/stuff/5.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/jtbs/1.txt" | pv -qL 10 
+cat /home/dev_user/stuff/jtbs/1.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/jtbs/2.txt" | pv -qL 10 
+cat /home/dev_user/stuff/jtbs/2.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/jtbs/3.txt" | pv -qL 10 
+cat /home/dev_user/stuff/jtbs/3.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/jtbs/4.txt" | pv -qL 10 
+cat /home/dev_user/stuff/jtbs/4.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /home/dev_user/stuff/jtbs/5.txt" | pv -qL 10 
+cat /home/dev_user/stuff/jtbs/5.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "" | pv -qL 10 
+
+exit

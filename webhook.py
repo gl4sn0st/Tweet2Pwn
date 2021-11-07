@@ -16,7 +16,7 @@ consumer_secret = os.environ['CONSUMER_SECRET']
 access = os.environ['ACCESS_TOKEN']
 secret = os.environ['SECRET_TOKEN']
 APP_PATH = "/root/t2p"
-AVAILABLE_MACHINES = { '1': '5;It feels nice becoming a root.;Add yourself to Hall of Fame file accessible in /root/html/index.html via command line', '2':'7;Einstein once said..;Add yourself to Hall of Fame accessible in /root/html/index.html via command line' }
+AVAILABLE_MACHINES = { '1': '5;It feels nice becoming a root.;Add yourself to Hall of Fame file accessible in /root/html/index.html via command line', '2':'10;Einstein once said..;Add yourself to Hall of Fame accessible in /root/html/index.html via command line' }
 api = TwitterAPI(consumer, consumer_secret, access, secret)
 
 app = Flask(__name__)
@@ -33,7 +33,7 @@ BOT_ID = get_account_id()
 def get_no(id, machine, attempts):
 	for i in range(1, int(attempts)+1):
 		if(Path(APP_PATH+"/user/commands/%s/%s_%s" % (machine, id, i)).is_file()):
-			if(i == attempts):
+			if(int(i) == int(attempts)):
 				return "user_done"
 			else:
 				continue
@@ -125,6 +125,7 @@ def handle_message(event_data):
 	cmds = msg_body.split("::")[1:] # All commands from message, after "::"
 	commands = ''.join(cmds) # In case someone put "::" in their commands, all elements from list "cmds" are joined
 	command_file = get_no(sender, machine_id, attempts) # Get path to file where all commands from user will be stored
+	print(command_file)
 	if(machine_id not in AVAILABLE_MACHINES):
 		print("machine ID %s not available" % machine_id)
 		return

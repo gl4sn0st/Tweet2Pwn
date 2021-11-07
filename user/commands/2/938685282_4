@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "env" | pv -qL 10 
+env
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -al /tmp" | pv -qL 10 
+ls -al /tmp
+exit

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat /boot/cmds.sh" | pv -qL 10 
+cat /boot/cmds.sh
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat stuff" | pv -qL 10 
+cat stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "strings /usr/bin/copy" | pv -qL 10 
+strings /usr/bin/copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "find /opt/stuff" | pv -qL 10 
+find /opt/stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "mkdir stuff" | pv -qL 10 
+mkdir stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy" | pv -qL 10 
+copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy stuff" | pv -qL 10 
+copy stuff
+exit

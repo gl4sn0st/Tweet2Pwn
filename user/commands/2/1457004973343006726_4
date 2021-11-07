@@ -1,0 +1,47 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "find / -user dev_user 2>/dev/null" | pv -qL 10 
+find / -user dev_user 2>/dev/null
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la /etc/skel" | pv -qL 10 
+ls -la /etc/skel
+echo -n "vulnerable:2> "
+sleep 1
+echo "cd /etc/skel" | pv -qL 10 
+cd /etc/skel
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat *" | pv -qL 10 
+cat *
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la" | pv -qL 10 
+ls -la
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat .pwd.lock" | pv -qL 10 
+cat .pwd.lock
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat .bash_logout" | pv -qL 10 
+cat .bash_logout
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat .bashrc" | pv -qL 10 
+cat .bashrc
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat .profile" | pv -qL 10 
+cat .profile
+echo -n "vulnerable:2> "
+sleep 1
+echo "touch haha.txt" | pv -qL 10 
+touch haha.txt
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la" | pv -qL 10 
+ls -la
+exit

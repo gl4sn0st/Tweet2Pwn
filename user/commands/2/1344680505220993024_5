@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "ln -s /root/html/index.html stuff/a" | pv -qL 10 
+ln -s /root/html/index.html stuff/a
+echo -n "vulnerable:2> "
+sleep 1
+echo "mkdir stuff/b" | pv -qL 10 
+mkdir stuff/b
+echo -n "vulnerable:2> "
+sleep 1
+echo "copy" | pv -qL 10 
+copy
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat stuff/b/index.html" | pv -qL 10 
+cat stuff/b/index.html
+echo -n "vulnerable:2> "
+sleep 1
+echo "find stuff" | pv -qL 10 
+find stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat stuff/*" | pv -qL 10 
+cat stuff/*
+exit

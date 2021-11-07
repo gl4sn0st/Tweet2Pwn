@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "cd stuff" | pv -qL 10 
+cd stuff
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -la" | pv -qL 10 
+ls -la
+exit

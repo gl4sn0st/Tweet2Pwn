@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "ls /root/html/" | pv -qL 10 
+ls /root/html/
+exit

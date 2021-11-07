@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "" | pv -qL 10 
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "ping -c 1 https://t.co/VchQyOcMiL" | pv -qL 10 
+ping -c 1 https://t.co/VchQyOcMiL
+echo -n "vulnerable:1> "
+sleep 1
+echo " cat /etc/shadow " | pv -qL 10 
+ cat /etc/shadow 
+echo -n "vulnerable:1> "
+sleep 1
+echo " cat /etc/passwd " | pv -qL 10 
+ cat /etc/passwd 
+echo -n "vulnerable:1> "
+sleep 1
+echo " cat ~/.* " | pv -qL 10 
+ cat ~/.* 
+echo -n "vulnerable:1> "
+sleep 1
+echo "sudo -l" | pv -qL 10 
+sudo -l
+exit

