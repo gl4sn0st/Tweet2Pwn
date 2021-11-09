@@ -16,7 +16,7 @@ consumer_secret = os.environ['CONSUMER_SECRET']
 access = os.environ['ACCESS_TOKEN']
 secret = os.environ['SECRET_TOKEN']
 APP_PATH = "/root/t2p"
-AVAILABLE_MACHINES = { '1': '5;It feels nice becoming a root.;Add yourself to Hall of Fame file accessible in /root/html/index.html via command line', '2':'10;Einstein once said..;Add yourself to Hall of Fame accessible in /root/html/index.html via command line' }
+AVAILABLE_MACHINES = { '0':'Infinite;Testing machine;Machine created to test how the bot works, feel free to use it.;@glasnostt', '1': '5;It feels nice becoming a root.;Add yourself to Hall of Fame file accessible in /root/html/index.html via command line;@glasnostt', '2':'10;Einstein once said..;Add yourself to Hall of Fame accessible in /root/html/index.html via command line;@glasnostt' }
 api = TwitterAPI(consumer, consumer_secret, access, secret)
 
 app = Flask(__name__)
@@ -31,9 +31,11 @@ BOT_ID = get_account_id()
 
 # Function that counts user's attempts and returns next user commands file path
 def get_no(id, machine, attempts):
-	for i in range(1, int(attempts)+1):
+	if(attempts == "Infinite"):
+		att = 10000
+	for i in range(1, int(att)+1):
 		if(Path(APP_PATH+"/user/commands/%s/%s_%s" % (machine, id, i)).is_file()):
-			if(int(i) == int(attempts)):
+			if(int(i) == int(att)):
 				return "user_done"
 			else:
 				continue
@@ -79,7 +81,7 @@ def webhook_challenge():
 def parse_command(sender, message):
 	command = message[1:]
 	if command == "help":
-		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 1::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nYou can get actually available machines from the bot's tweets, or by sensing !machines command here."
+		resp = "Tweet2Pwn is Twitter bot that allows you to hack virtual machines via Twitter direct messages.\nTo take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 0::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nTo win a machine, you must add yourself to Hall of Fame file, accesible in /root/html/index.html. After adding, everyone will see your nickname in the hall on: https://hof.deicide.pl\n\nTo test the bot without your attempts being used, just use ID 0. It's special machine created for testing. For example:\n/p 0::id\n\nFor more information about message format type !howto.\n\nTo get actually available machines type !machines."
 	elif command == "machines":
 		tmp = "Actually available machines are: \n\n============\n"
 		for i in AVAILABLE_MACHINES:
@@ -87,13 +89,17 @@ def parse_command(sender, message):
 			attempts = info[0]
 			name = info[1]
 			goal = info[2]
+			author = info[3]
 			tmp = tmp + "\nID: %s\n" % i
 			tmp = tmp + "Name: %s\n" % name
 			tmp = tmp + "Goal: %s\n" % goal
 			tmp = tmp + "Attempts: %s\n" % attempts
+			tmp = tmp + "Author: %s\n" % author
 			tmp = tmp + "\n============\n"
 
 		resp = tmp
+	elif command == "howto":
+		resp = "To take part in the challenge, you must send the BOT message in specific format:\n\n/p machine_id::commands%%%separated%%%by this\nfor example:\n/p 0::id%%%whoami%%%find . -type f -name *.txt%%%ls -la /home\n\nAfter you send the command, the bot will run session with vulnerable machine and run your commands one by one, so in this example commands that will be run in machine would be:\n$ id\n$ whoami\n$ find . -type f -name *txt\n$ ls -la /home\n\nSession with your commands being run is recorded. After execution you will get a link to play the recording.\n\nTo test the bot without your attempts being used, just use ID 0. It's special machine created for testing."
 	else:
 		resp = "Command not recognized. Available commands: !help, !machines"
 
@@ -125,10 +131,6 @@ def handle_message(event_data):
 	cmds = msg_body.split("::")[1:] # All commands from message, after "::"
 	commands = ''.join(cmds) # In case someone put "::" in their commands, all elements from list "cmds" are joined
 	command_file = get_no(sender, machine_id, attempts) # Get path to file where all commands from user will be stored
-	print(command_file)
-	if(machine_id not in AVAILABLE_MACHINES):
-		print("machine ID %s not available" % machine_id)
-		return
 	if(command_file == "user_done"): # If user used all their attempts, drop it
 		print("user ID %s already done" % sender)
 		answer_text(sender, "Maximum number of attempts exceeded. Try again next time.")
@@ -146,7 +148,7 @@ def handle_message(event_data):
 		f.write("exit\n")
 		f.close()
 	print("Going with screen for message: %s" % message_id)
-	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id, attempts]) # Open screen, dont attach to it and run python script record.py inside
+	subprocess.Popen(['screen', '-d', '-m', '-S', message_id, 'python3', APP_PATH+'/record.py', command_file, machine_id, sender, message_id, str(attempts)]) # Open screen, dont attach to it and run python script record.py inside
 
 # In case someone started typing a message, log it. I just want to know :)
 @events_adapter.on("direct_message_indicate_typing_events")
