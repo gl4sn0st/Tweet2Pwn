@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:2> "
-sleep 1
-echo "man copy" | pv -qL 10 
-man copy
-exit

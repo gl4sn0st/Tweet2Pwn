@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:2> "
-sleep 1
-echo "strings /usr/bin/copy" | pv -qL 10 
-strings /usr/bin/copy
-exit

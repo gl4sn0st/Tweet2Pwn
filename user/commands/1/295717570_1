@@ -1,9 +1,0 @@
-#!/bin/bash
-
-echo -n "$ "
-echo "echo \"<i>2. kubolos231</i>\" >> /root/html/index.html" | pv -qL 10 
-echo "<i>2. kubolos231</i>" >> /root/html/index.html
-echo -n "$ "
-echo "id" | pv -qL 10 
-id
-exit

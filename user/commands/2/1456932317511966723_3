@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:2> "
-sleep 1
-echo "find / -group dev_user 2>/dev/null" | pv -qL 10 
-find / -group dev_user 2>/dev/null
-exit

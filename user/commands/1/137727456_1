@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo -n "$ "
-echo "id" | pv -qL 10 
-id
-exit

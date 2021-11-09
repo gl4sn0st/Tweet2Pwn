@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:2> "
-sleep 1
-echo "id" | pv -qL 10 
-id
-exit

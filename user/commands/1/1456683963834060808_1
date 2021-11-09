@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:1> "
-sleep 1
-echo "echo -e '\\n ~~~ <a href=\"https://t.co/8yyif1o468\">@ziemni_</a> ~~~\\n' | /usr/bin/nice tee -a /root/html/index.html" | pv -qL 10 
-echo -e '\n ~~~ <a href="https://t.co/8yyif1o468">@ziemni_</a> ~~~\n' | /usr/bin/nice tee -a /root/html/index.html
-exit

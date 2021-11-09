@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo -n "vulnerable:1> "
-sleep 1
-echo "/usr/bin/nice -pc \"whoami;echo;cat /root/html/index.html\"" | pv -qL 10 
-bash -c "/usr/bin/nice -pc \"whoami;echo;cat /root/html/index.html\""
-exit
